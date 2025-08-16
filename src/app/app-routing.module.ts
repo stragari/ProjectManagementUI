@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { ProjectListComponent } from './projects/project-list/project-list.component';
+
+const routes: Routes = [
+  {path: '', redirectTo: 'projects', pathMatch: 'full'}, 
+  {
+    path: 'projects',
+    // lazy configuration loading to ProjectModule
+    loadChildren: () => import('./projects/projects.module').then(m => m.ProjectsModule)
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

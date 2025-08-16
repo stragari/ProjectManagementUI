@@ -1,0 +1,37 @@
+<div class="container">
+    <div *ngIf="project">
+        <h2>Project: {{ project.name }}</h2>
+
+        <div class="task-header">
+            <button type="button" (click)="openAddTaskModal()">New Task</button>
+        </div>
+
+        <div class="task-list">
+            <h3>Task</h3>
+            <div *ngIf="project.tasks.length === 0">
+                <p>No tasks registered.</p>
+            </div>
+            <div 
+                *ngFor="let task of project.tasks" 
+                class="task-item"
+                [class.completed]="task.isCompleted"
+                (click)="markTaskAsCompleted(task.id)"
+            >
+                <span appTaskHighlight [isCompleted]="task.isCompleted">{{ task.title }}</span>
+                <small class="status-badge">{{ task.isCompleted | taskStatus }}</small>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!project">
+        <p>Project not founded...</p>
+    </div>
+</div>
+
+<div class="modal" *ngIf="showAddTaskModal">
+  <div class="modal-content">
+    <span class="close-button" (click)="closeAddTaskModal()">&times;</span>
+    <h3>Add new task</h3>
+    <input type="text" [(ngModel)]="newTaskTitle" placeholder="Título de la tarea" required>
+    <button type="button" (click)="addTask()" [disabled]="!newTaskTitle.trim()">Save</button>
+  </div>
+</div>

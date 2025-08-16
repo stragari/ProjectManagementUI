@@ -1,0 +1,17 @@
+<h2>Projects List</h2>
+
+<div class="header-actions">
+    <button type="button" [routerLink]="['/projects/create']">Create new Project</button>
+</div>
+
+<div class="project-list" *ngIf="projects$ | async as projects">
+    <div *ngIf="projects.length === 0">
+        <p>No projects found.</p>
+    </div>
+
+    <div *ngFor="let project of projects" class="project-item">
+        <a [routerLink]="['/projects', project.id]">
+            <h3>{{ project.name }}</h3>
+        </a>
+    </div>
+</div>

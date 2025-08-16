@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>Create New Project</h2>
+
+    <form (ngSubmit)="createProject()">
+        <div class="form-group">
+            <label for="projectName">Project Name:</label>
+            <input type="text" id="projectName" [(ngModel)]="projectName" name="projectName" required>
+        </div>
+        <div class="form-actions">
+            <button type="submit">Create</button>
+            <button type="button" [routerLink]="['/projects/list']">Cancel</button>
+        </div>
+    </form>
+</div>
